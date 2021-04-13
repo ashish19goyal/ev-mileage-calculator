@@ -1,6 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: "EV mileage calculator",
+    description:
+      "Estimate the performance of your next desired Electric Vehicle. Compare its performance with your Petrol/Diesel Vehicle.",
+    author: "Ashish Goyal",
   },
   plugins: [
     "gatsby-plugin-image",
@@ -36,5 +39,6 @@ module.exports = {
       },
       __key: "pages",
     },
+    "gatsby-plugin-material-ui",
   ],
 };
