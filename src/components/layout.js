@@ -37,8 +37,7 @@ const Layout = ({ children }) => {
           >
             <main>{children}</main>
             <footer style={{ paddingTop: 10 }}>
-              © {new Date().getFullYear()}, EV Mileage Calculator
-              {` `}
+              © {new Date().getFullYear()} Author: Ashish Goyal
             </footer>
           </div>
         </div>
