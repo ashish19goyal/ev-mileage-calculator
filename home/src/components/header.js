@@ -1,44 +1,47 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from "prop-types";
+import React from "react";
 
-import { Link } from 'gatsby'
+import { Link } from "gatsby";
 
-import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import HomeIcon from '@material-ui/icons/Home'
-import ListIcon from '@material-ui/icons/ViewList'
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import HomeIcon from "@material-ui/icons/Home";
+import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
+import SwapCallsIcon from "@material-ui/icons/SwapCalls";
+import PowerIcon from "@material-ui/icons/Power";
+import DriveEtaIcon from "@material-ui/icons/DriveEta";
 
-const drawerWidth = 240
+const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: 'linear-gradient(to right,  #663399, #5B72FF)',
+    background: "linear-gradient(to right,  #663399, #5B72FF)",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -47,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   hide: {
-    display: 'none',
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
@@ -57,42 +60,42 @@ const useStyles = makeStyles(theme => ({
     width: drawerWidth,
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
+    display: "flex",
+    alignItems: "center",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: -drawerWidth,
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
   },
-}))
+}));
 
 const Header = ({ siteTitle }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
   function handleDrawerOpen() {
-    setOpen(true)
+    setOpen(true);
   }
 
   function handleDrawerClose() {
-    setOpen(false)
+    setOpen(false);
   }
 
   return (
@@ -131,7 +134,7 @@ const Header = ({ siteTitle }) => {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
+            {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
@@ -145,29 +148,53 @@ const Header = ({ siteTitle }) => {
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              <ListItemText>Home</ListItemText>
+              <ListItemText>Mileage Calculator</ListItemText>
             </ListItem>
           </Link>
-          <Link to="/components">
+          <Link to="/about-ev">
             <ListItem button>
               <ListItemIcon>
-                <ListIcon />
+                <DriveEtaIcon />
               </ListItemIcon>
-              <ListItemText>Components</ListItemText>
+              <ListItemText>About Electric Vehicle</ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/batteries">
+            <ListItem button>
+              <ListItemIcon>
+                <BatteryChargingFullIcon />
+              </ListItemIcon>
+              <ListItemText>Batteries</ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/charging-points">
+            <ListItem button>
+              <ListItemIcon>
+                <PowerIcon />
+              </ListItemIcon>
+              <ListItemText>Charging Points</ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/swapping-stations">
+            <ListItem button>
+              <ListItemIcon>
+                <SwapCallsIcon />
+              </ListItemIcon>
+              <ListItemText>Swapping Stations</ListItemText>
             </ListItem>
           </Link>
         </List>
       </Drawer>
     </div>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
   siteTitle: ``,
-}
+};
 
-export default Header
+export default Header;
