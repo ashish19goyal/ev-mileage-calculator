@@ -21,7 +21,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
-import SwapCallsIcon from "@material-ui/icons/SwapCalls";
+import EcoIcon from "@material-ui/icons/Eco";
 import PowerIcon from "@material-ui/icons/Power";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: "linear-gradient(to right,  #663399, #5B72FF)",
+    background: "linear-gradient(to right,  #9cb40c, #598009)",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -175,12 +175,12 @@ const Header = ({ siteTitle }) => {
               <ListItemText>Charging Points</ListItemText>
             </ListItem>
           </Link>
-          <Link to="/swapping-stations">
+          <Link to="/environment">
             <ListItem button>
               <ListItemIcon>
-                <SwapCallsIcon />
+                <EcoIcon />
               </ListItemIcon>
-              <ListItemText>Swapping Stations</ListItemText>
+              <ListItemText>Environment</ListItemText>
             </ListItem>
           </Link>
         </List>
