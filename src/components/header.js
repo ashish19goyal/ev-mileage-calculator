@@ -19,7 +19,6 @@ import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
 import EcoIcon from "@material-ui/icons/Eco";
 import PowerIcon from "@material-ui/icons/Power";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
-import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import HeaderLink from "../components/header-link";
 import Grid from "@material-ui/core/Grid";
 

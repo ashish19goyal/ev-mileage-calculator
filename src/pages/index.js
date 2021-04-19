@@ -15,10 +15,10 @@ import Collapse from "@material-ui/core/Collapse";
 
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import Done from "@material-ui/icons/Done";
 import MotorcycleIcon from "@material-ui/icons/Motorcycle";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import LocalShippingOutlinedIcon from "@material-ui/icons/LocalShippingOutlined";
+import EVCalculator from "../components/ev-calculator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(4),
   },
 }));
+
+const twoWheelersList = ["Ather", "Bajaj", "TVS", "PureEV"];
+const threeWheelersList = ["Mahindra", "Kinetic", "Atul", "Euler"];
+const fourWheelersList = ["Tata", "MG", "Hyundai"];
 
 const IndexPage = () => {
   const classes = useStyles();
@@ -91,38 +95,7 @@ const IndexPage = () => {
           {twowheelers ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={twowheelers} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Material UI Framework" />
-            </ListItem>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Progressive Web App" />
-            </ListItem>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="SEO" />
-            </ListItem>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Offline Support" />
-            </ListItem>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Roboto Typeface (self hosted)" />
-            </ListItem>
-          </List>
+          <EVCalculator models={twoWheelersList} />
         </Collapse>
         <ListItem button onClick={() => handleClick("threewheelers")}>
           <ListItemIcon>
@@ -132,20 +105,7 @@ const IndexPage = () => {
           {threewheelers ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={threewheelers} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Based on Gatsby Default Starter" />
-            </ListItem>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Uses Gatsby Material UI Plugin" />
-            </ListItem>
-          </List>
+          <EVCalculator models={threeWheelersList} />
         </Collapse>
         <ListItem button onClick={() => handleClick("fourwheelers")}>
           <ListItemIcon>
@@ -155,20 +115,7 @@ const IndexPage = () => {
           {fourwheelers ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={fourwheelers} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Based on Gatsby Default Starter" />
-            </ListItem>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <Done />
-              </ListItemIcon>
-              <ListItemText primary="Uses Gatsby Material UI Plugin" />
-            </ListItem>
-          </List>
+          <EVCalculator models={fourWheelersList} />
         </Collapse>
       </List>
     </Layout>
