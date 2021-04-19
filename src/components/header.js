@@ -21,6 +21,7 @@ import PowerIcon from "@material-ui/icons/Power";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import HeaderLink from "../components/header-link";
+import Grid from "@material-ui/core/Grid";
 
 const drawerWidth = 240;
 
@@ -81,15 +82,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const homeLink = {
+  link: "/",
+  heading: "Mileage Calculator",
+  icon: <HomeIcon />,
+};
+
 const links = [
   {
-    link: "/",
-    heading: "Mileage Calculator",
-    icon: <HomeIcon />,
-  },
-  {
     link: "/about-ev",
-    heading: "About Electric Vehicle",
+    heading: "Electric Vehicle",
     icon: <DriveEtaIcon />,
   },
   {
@@ -98,7 +100,7 @@ const links = [
     icon: <BatteryChargingFullIcon />,
   },
   {
-    link: "/charing-points",
+    link: "/charging-points",
     heading: "Charging Points",
     icon: <PowerIcon />,
   },
@@ -106,11 +108,6 @@ const links = [
     link: "/environment",
     heading: "Environment",
     icon: <EcoIcon />,
-  },
-  {
-    link: "/faqs",
-    heading: "FAQs",
-    icon: <LiveHelpIcon />,
   },
 ];
 
@@ -162,15 +159,22 @@ const Header = ({ siteTitle }) => {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </div>
+        <Grid container>
+          <Grid item xs={10}>
+            <HeaderLink {...homeLink} />
+          </Grid>
+          <Grid item xs={2}>
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === "ltr" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </div>
+          </Grid>
+        </Grid>
         <Divider />
         <List>
           {links.map((link) => (

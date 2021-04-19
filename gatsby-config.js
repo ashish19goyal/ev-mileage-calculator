@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: "EV mileage calculator",
+    title: "EV Mileage Calculator",
     description:
       "Estimate the performance of your next desired Electric Vehicle. Compare its performance with your Petrol/Diesel Vehicle.",
     author: "Ashish Goyal",

@@ -2,76 +2,53 @@ import React from "react";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
+import GridFaq from "../components/grid-faq";
 
-const Batteries = () => (
-  <Layout>
-    <Seo title="Electric Vehicle Batteries" />
-    <h4>History</h4>
-    <p>
-      Batteries started to be tested for transport in 2010. It has taken more
-      than a decade to become commercialy viable for transport sector.
-    </p>
-    <h4>Battery Packs</h4>
-    <ul>
-      <li>
-        Battery packs consist of modules. It has coolants. It has battery
-        management system.
-      </li>
-      <li>
-        Battery Modules consist of cells. It provides physical protection to
-        cells
-      </li>
-      <li>Battery cells are the smallest working unit of power generation</li>
-    </ul>
-    <h4>Efficiency</h4>
-    <ul>
-      <li>
-        Efficiency of batteries is measured in terms of
-        <ul>
-          <li>Gravitational Energy Density: W/kg </li>
-          <li>Volumetric Energy Density: W/litre</li>
-        </ul>
-      </li>
+const questions = [
+  {
+    question: "Why do we use batteries in electric vehicles?",
+    answer:
+      "Batteries provide an easy way of storing electric energy. This energy can be used in a controlled manner when required. Today batteries are used in a number of applications ranging from smartphones to space stations.",
+  },
+  {
+    question: "Are batteries safe to use in vehicles?",
+    answer:
+      "Batteries are being used in vehicles for a long time. Earlier they supported only auxillary functions like power windows, headlights etc. In EVs, these batteries replace fossil fuel as the primary source of energy. Batteries are already safer than the fossil fuels. This will further improve in future with better techology for battery management.",
+  },
+  {
+    question: "What do batteries consist of?",
+    answer:
+      "The energy requirement of automobiles is very high. To meet this requirement a complex array of batteries is used. These are structured as follows -",
+    list: [
+      "Cells : This is the smallest working unit of power generation. Usually these are li-ion cells",
+      "Modules: Cells are combined into modules. The purpose of a module is to provide physical protection to underlying cells",
+      "Packs: Modules are combined into packs. Each pack includes the battery management system (BMS). It also has coolant and cooling systems to ensure good performance for the batteries.",
+    ],
+  },
+  {
+    question: "How can I compare batteries available for use in EVs?",
+    answer:
+      "To compare the batteries, we can rely on the following efficiency parameters",
+    list: [
+      "Gravitation Energy Density : This is the amount of energy carried per unit wieght by the battery. Measured in Watts/Kg. The higher it is the better, as you would need to carry less dead weight of the battery for same vehicle range.",
+      "Volumetric Energy Density: This is the amount of energy carried per unit volume of the battery. Measured in Watts/litre. The higher it is the better, as you would have to devote lesser space on vehicle to battery units.",
+      "C-Rate: This is the rate of charge or discharge of battery. The higher it is the better, as your vehicle would be able to charge faster. Also, when higher power is required, it can deliver better pickup. It also depends on the temperature of the battery unit.",
+      "Depth of discharge: It specifies the working range of the battery. e.g. a battery can be used effectively between 10% charged to 90% charged state only. The higher it is the better.",
+    ],
+  },
+];
 
-      <li>
-        Rate of charge or discharge, also called c-rate.
-        <ul>
-          <li>It denotes how fast a battery can be charged. </li>
-          <li>
-            This is independent of charger. Even with a fast charger, speed of
-            charging is limited by batteries C-rate.
-          </li>
-          <li>It depends on temperature</li>
-          <li>Li-ion has 1-2C rate 1C battery can fully charge in 1 hour </li>
-          <li>0.5C battery can fully charge in 2 hours </li>
-        </ul>
-      </li>
+const BatteryPage = () => {
+  let serial = 0;
+  return (
+    <Layout>
+      <Seo title="About Batteries" />
+      {questions.map((question) => {
+        serial++;
+        return <GridFaq serial={serial} {...question} />;
+      })}
+    </Layout>
+  );
+};
 
-      <li>
-        Depth of discharge (DoD)
-        <ul>
-          <li>
-            It signifies the working range of the battery. e.g. from 90% charge
-            to 10% charge.
-          </li>
-        </ul>
-      </li>
-
-      <li>
-        Form Factors
-        <ul>
-          <li>
-            Cylindrical: Used by Tesla, Ola, Reva. Over-engineered for heat
-            management
-          </li>
-          <li>
-            Prismatic/Pouch: Standardized by multiple manufacturers Was
-            initially used by Reva Polymer
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </Layout>
-);
-
-export default Batteries;
+export default BatteryPage;

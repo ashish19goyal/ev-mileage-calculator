@@ -1,13 +1,24 @@
 import React from "react";
-import Info from "../components/info";
+
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import Grid from "@material-ui/core/Grid";
+import GridFaq from "../components/grid-faq";
 
-const infoSections = [
+const questions = [
   {
-    heading: "Types of Vehicles",
-    description: "There are four types of vehicles",
+    question: "What is EV?",
+    answer:
+      "EV stands for Electric Vehicle. It may refer to Electric Cars, Two Wheelers, Three Wheelers, Buses and Trucks",
+  },
+  {
+    question: "What are ICE vehicles?",
+    answer:
+      "ICE stands for Internal Combustion Engine. Vehicles running on fossil fuels (petrol and diesel) belong to this category.",
+  },
+  {
+    question: "Are there any other types of vehicles?",
+    answer:
+      "Yes, all vehicles of the day can be categorised into one of the following categories",
     list: [
       "ICE: Internal Combustion Engine Vehicle",
       "HEV: Hybrid Electric Vehicle",
@@ -15,37 +26,39 @@ const infoSections = [
       "EV: Electric Vehicle",
     ],
   },
-
   {
-    heading: "ICE vs EV",
-    description: "There are four types of vehicles",
+    question: "How are EVs different from ICE vehicles?",
+    answer:
+      "Primary difference between EV and ICE vehicles is the source of energy. ICE vehicles use fossil fuels whereas EV uses batteries. There are other notable differences such as -",
     list: [
-      "ICE has about 50 times more moving parts than EVs",
-      "ICE has high torque in specific RPM range only. EV doesn't have this problem. So gear box in EV is very simple.",
-      "ICE has 25% power transfer efficiency whereas EV has 80-90%.",
+      "ICE vehicles have about 50 times more moving parts than EVs",
+      "ICE vehicles have high torque in specific RPM range only. EVs don't have this problem. So gear box in EVs is very simple.",
+      "ICE vehicles have 25% power transfer efficiency whereas EVs has 80-90%.",
     ],
   },
-
   {
-    heading: "Assembly of EV",
-    description:
-      "EV has fewer components compared to ICE. These components can be placed anywhere in the vehicle, making assembly more flexible as compared to ICE. The only thing to make sure is the stability of the vehicle.",
+    question: "Does EV work differently from ICE vehicles?",
+    answer:
+      "The mechanics of working of EV are almost the same as those of ICE vehicles. Notably, EVs have fewer sub systems and components as compared to ICE vehicle, making their maintenance cheaper.",
+  },
+  {
+    question: "Can I convert my ICE vehicle to EV?",
+    answer:
+      "Theoretically this is doable. However, financial considerations do not favour converting existing ICE vehicle to EV. It will be financially prudent to opt for your next vehicle to be an EV rather than converting your existing vechile.",
   },
 ];
 
-const AboutEVPage = () => (
-  <Layout>
-    <Seo title="About Electric Vehicles" />
-    <Grid container spacing={3} justify="center">
-      {infoSections.map((info) => (
-        <Info
-          heading={info.heading}
-          description={info.description}
-          list={info.list}
-        ></Info>
-      ))}
-    </Grid>
-  </Layout>
-);
+const AboutEVPage = () => {
+  let serial = 0;
+  return (
+    <Layout>
+      <Seo title="About Electric Vehicles" />
+      {questions.map((question) => {
+        serial++;
+        return <GridFaq serial={serial} {...question} />;
+      })}
+    </Layout>
+  );
+};
 
 export default AboutEVPage;
