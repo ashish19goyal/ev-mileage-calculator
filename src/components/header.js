@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import { Link } from "gatsby";
-
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -16,14 +14,13 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
 import EcoIcon from "@material-ui/icons/Eco";
 import PowerIcon from "@material-ui/icons/Power";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
+import LiveHelpIcon from "@material-ui/icons/LiveHelp";
+import HeaderLink from "../components/header-link";
 
 const drawerWidth = 240;
 
@@ -84,6 +81,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const links = [
+  {
+    link: "/",
+    heading: "Mileage Calculator",
+    icon: <HomeIcon />,
+  },
+  {
+    link: "/about-ev",
+    heading: "About Electric Vehicle",
+    icon: <DriveEtaIcon />,
+  },
+  {
+    link: "/batteries",
+    heading: "Batteries",
+    icon: <BatteryChargingFullIcon />,
+  },
+  {
+    link: "/charing-points",
+    heading: "Charging Points",
+    icon: <PowerIcon />,
+  },
+  {
+    link: "/environment",
+    heading: "Environment",
+    icon: <EcoIcon />,
+  },
+  {
+    link: "/faqs",
+    heading: "FAQs",
+    icon: <LiveHelpIcon />,
+  },
+];
+
 const Header = ({ siteTitle }) => {
   const classes = useStyles();
 
@@ -143,46 +173,9 @@ const Header = ({ siteTitle }) => {
         </div>
         <Divider />
         <List>
-          <Link to="/">
-            <ListItem button>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText>Mileage Calculator</ListItemText>
-            </ListItem>
-          </Link>
-          <Link to="/about-ev">
-            <ListItem button>
-              <ListItemIcon>
-                <DriveEtaIcon />
-              </ListItemIcon>
-              <ListItemText>About Electric Vehicle</ListItemText>
-            </ListItem>
-          </Link>
-          <Link to="/batteries">
-            <ListItem button>
-              <ListItemIcon>
-                <BatteryChargingFullIcon />
-              </ListItemIcon>
-              <ListItemText>Batteries</ListItemText>
-            </ListItem>
-          </Link>
-          <Link to="/charging-points">
-            <ListItem button>
-              <ListItemIcon>
-                <PowerIcon />
-              </ListItemIcon>
-              <ListItemText>Charging Points</ListItemText>
-            </ListItem>
-          </Link>
-          <Link to="/environment">
-            <ListItem button>
-              <ListItemIcon>
-                <EcoIcon />
-              </ListItemIcon>
-              <ListItemText>Environment</ListItemText>
-            </ListItem>
-          </Link>
+          {links.map((link) => (
+            <HeaderLink {...link} />
+          ))}
         </List>
       </Drawer>
     </div>

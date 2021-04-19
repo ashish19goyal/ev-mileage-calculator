@@ -64,12 +64,12 @@ const IndexPage = () => {
     <Layout>
       <Seo title="Home" />
       <Grid container spacing={3} justify="center">
-        <Grid item xs={10}>
+        <Grid item xs={10} sm={3}>
           <div style={{ maxWidth: `500px` }}>
             <Image />
           </div>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={9}>
           <h2>EV Mileage Calculator</h2>
           <p>
             Estimate the performance of your next desired Electric Vehicle.
