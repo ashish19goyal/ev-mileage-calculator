@@ -628,3 +628,12 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+p.MuiFormHelperText-root,
+p.MuiFormHelperText-contained {
+  margin-left: 0px;
+}
+
+div.MuiInputAdornment-filled.MuiInputAdornment-positionStart:not(.MuiInputAdornment-hiddenLabel) {
+  margin-top: 0px;
+}

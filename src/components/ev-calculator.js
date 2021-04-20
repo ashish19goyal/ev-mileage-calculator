@@ -3,7 +3,6 @@ import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
 import EvsInMarket from "../ev-models/evs-in-market";
 import EvSelect from "./form-elements/ev-select";
-import EvText from "./form-elements/ev-text";
 import EvInput from "./form-elements/ev-input";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -34,18 +33,15 @@ const EVCalculator = ({ type }) => {
   const [make, setMake] = React.useState("");
   const [modelList, setModelList] = React.useState([]);
   const [model, setModel] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [range, setRange] = React.useState(0);
-  const [mileage, setMileage] = React.useState(0);
+  const [modelInfo, setModelInfo] = React.useState({ battery: {} });
 
   // battery details
-  const [batteryCapacity, setBatteryCapacity] = React.useState("");
-  const [chargingCycles, setChargingCycles] = React.useState("");
-  const [batteryPrice, setBatteryPrice] = React.useState("");
-  const [cRate, setcRate] = React.useState("");
-  const [dod, setDod] = React.useState("");
   const [runningCost, setRunningCost] = React.useState("");
   const [totalRunningCost, setTotalRunningCost] = React.useState("");
+
+  // rates
+  const [interestRate, setInterestRate] = React.useState(10);
+  const [electricityCharges, setElectricityCharges] = React.useState(10);
 
   // usage pattern
   const [dailyRun, setDailyRun] = React.useState(10);
@@ -59,6 +55,7 @@ const EVCalculator = ({ type }) => {
 
   const handleChargingStyleChange = (event) => {
     setChargingStyle(event.target.value);
+    calculateCost({ modelInfo, electricityCharges, interestRate });
   };
 
   const handleMakeChange = (event) => {
@@ -77,27 +74,69 @@ const EVCalculator = ({ type }) => {
   const handleModelChange = (event) => {
     let m = event.target.value;
     setModel(m);
-    setModelInfo(m);
+    getModelInfo(m);
   };
 
   const handleDailyRunChange = (event) => {
     setDailyRun(event.target.value);
+    calculateCost({ modelInfo, electricityCharges, interestRate });
   };
 
-  const setModelInfo = (m) => {
+  const handleInterestRateChange = (event) => {
+    setInterestRate(event.target.value);
+    calculateCost({
+      modelInfo,
+      electricityCharges,
+      interestRate: event.target.value,
+    });
+  };
+
+  const handleElectricityChargesChange = (event) => {
+    setElectricityCharges(event.target.value);
+    calculateCost({ modelInfo, electricityCharges: event.target.value });
+  };
+
+  const getModelInfo = (m) => {
     let modelInfo = EvsInMarket[type].filter(
       (vehicle) => vehicle.make === make && vehicle.model === m
     );
     if (modelInfo.length === 1) {
-      setDescription(modelInfo[0].description);
-      setRange(modelInfo[0].range);
-      setMileage(modelInfo[0].range);
-      setBatteryPrice(modelInfo[0].battery.price);
-      setBatteryCapacity(modelInfo[0].battery.capacity);
-      setChargingCycles(modelInfo[0].battery.cycles);
-      setcRate(modelInfo[0].battery.cRate);
-      setDod(modelInfo[0].battery.dod);
+      setModelInfo(modelInfo[0]);
+      calculateCost({
+        modelInfo: modelInfo[0],
+        electricityCharges,
+        interestRate,
+      });
     }
+  };
+
+  const calculateCost = ({ modelInfo, electricityCharges, interestRate }) => {
+    if (electricityCharges != null) {
+      let runningCostValue = (
+        (modelInfo.mileage * electricityCharges) /
+        1000
+      ).toFixed(2);
+      setRunningCost(runningCostValue);
+    }
+
+    let priceIncludingInterest =
+      (interestRate * modelInfo.battery.price * modelInfo.battery.cycles) /
+        1.55 /
+        365 /
+        100 +
+      modelInfo.battery.price;
+    console.log("priceIncludingInterest " + priceIncludingInterest);
+    let totalKms =
+      (modelInfo.battery.cycles *
+        modelInfo.battery.capacity *
+        1000 *
+        modelInfo.battery.dod) /
+      modelInfo.mileage;
+    let totalRunningCostValue = (
+      (modelInfo.mileage * electricityCharges) / 1000 +
+      priceIncludingInterest / totalKms
+    ).toFixed(2);
+    setTotalRunningCost(totalRunningCostValue);
   };
 
   return (
@@ -118,53 +157,65 @@ const EVCalculator = ({ type }) => {
           handleChange={handleModelChange}
           label="EV Model"
           value={model}
-          description="Mileage will be calculated for this model"
+          description="Costs will be calculated for this model"
         />
-        <EvText
+        <EvInput
           label="Description"
-          value={description}
+          value={modelInfo.description}
           description="Type of vehicle"
           multiline
+          readonly
         />
-        <EvText
+        <EvInput
           label="Range"
-          value={range + ""}
-          description="Range of vehicle in Km"
+          value={modelInfo.range}
+          description="Range of vehicle"
+          endUnit="km"
+          readonly
         />
-        <EvText
+        <EvInput
           label="Mileage"
-          value={mileage + ""}
-          description="Mileage of vehicle in Wh/Km"
+          value={modelInfo.mileage}
+          description="Mileage of vehicle"
+          endUnit="Wh/km"
+          readonly
         />
       </Paper>
       <Paper className={classes.paper}>
         <Grid>
           <h4>Battery Specifications</h4>
         </Grid>
-        <EvText
+        <EvInput
           label="Battery Price"
-          value={batteryPrice}
-          description="One time cost of the battery"
+          value={modelInfo.battery.price}
+          description="Cost of changing the battery"
+          startUnit="Rs"
+          readonly
         />
-        <EvText
+        <EvInput
           label="Battery Capacity"
-          value={batteryCapacity}
-          description="Energy capacity of the battery in KWh"
+          value={modelInfo.battery.capacity}
+          description="Energy capacity of the battery"
+          endUnit="kwh"
+          readonly
         />
-        <EvText
+        <EvInput
           label="C-Rate"
-          value={cRate}
+          value={modelInfo.battery.cRate}
           description="Higher the better. Read FAQs for more information."
+          readonly
         />
-        <EvText
+        <EvInput
           label="Depth of Discharge"
-          value={dod}
+          value={modelInfo.battery.dod}
           description="Higher the better. Read FAQs for more information."
+          readonly
         />
-        <EvText
+        <EvInput
           label="Charging Cycles"
-          value={chargingCycles}
+          value={modelInfo.battery.cycles}
           description="Life of battery in terms of charging cycles"
+          readonly
         />
       </Paper>
       <Paper className={classes.paper}>
@@ -175,8 +226,9 @@ const EVCalculator = ({ type }) => {
         <EvInput
           label="Daily run"
           value={dailyRun}
-          description="Estimate of your daily commute in km"
+          description="Estimate of your daily commute"
           handleChange={handleDailyRunChange}
+          endUnit="km"
         />
         <EvSelect
           items={chargingStyles}
@@ -188,17 +240,43 @@ const EVCalculator = ({ type }) => {
       </Paper>
       <Paper className={classes.paper}>
         <Grid>
-          <h4>Cost estimates</h4>
+          <h4>Market Rates as of today</h4>
         </Grid>
-        <EvText
+        <EvInput
+          label="Interest Rate on automobile loans"
+          value={interestRate}
+          description="You can update the interest rate if desired"
+          handleChange={handleInterestRateChange}
+          endUnit="%"
+        />
+        <EvInput
+          label="Electricity Charges"
+          value={electricityCharges}
+          description="You can update the charges as per rates in your area"
+          handleChange={handleElectricityChargesChange}
+          startUnit="Rs"
+          endUnit="/kwh"
+        />
+      </Paper>
+      <Paper className={classes.paper}>
+        <Grid>
+          <h4>Cost Estimates</h4>
+        </Grid>
+        <EvInput
           label="Daily Running Cost"
           value={runningCost}
-          description="In Rs/km"
+          description="Running cost"
+          startUnit="Rs"
+          endUnit="/km"
+          readonly
         />
-        <EvText
+        <EvInput
           label="Total Running Cost"
           value={totalRunningCost}
-          description="Running and capital cost of battery (in Rs/km)"
+          description="Running cost including cost of change of battery"
+          startUnit="Rs"
+          endUnit="/km"
+          readonly
         />
       </Paper>
     </div>
