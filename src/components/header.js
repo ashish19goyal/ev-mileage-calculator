@@ -176,8 +176,8 @@ const Header = ({ siteTitle }) => {
         </Grid>
         <Divider />
         <List>
-          {links.map((link) => (
-            <HeaderLink {...link} />
+          {links.map((link, i) => (
+            <HeaderLink {...link} key={i} />
           ))}
         </List>
       </Drawer>

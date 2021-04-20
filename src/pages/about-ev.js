@@ -3,6 +3,8 @@ import React from "react";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import GridFaq from "../components/grid-faq";
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
 
 const questions = [
   {
@@ -53,9 +55,16 @@ const AboutEVPage = () => {
   return (
     <Layout>
       <Seo title="About Electric Vehicles" />
-      {questions.map((question) => {
+      <Grid container item>
+        <h2>About Electric Vehicle</h2>
+        <p>
+          Find the most frequently asked questions about electric vehicles here.
+        </p>
+      </Grid>
+      <Divider />
+      {questions.map((question, i) => {
         serial++;
-        return <GridFaq serial={serial} {...question} />;
+        return <GridFaq key={i} serial={serial} {...question} />;
       })}
     </Layout>
   );

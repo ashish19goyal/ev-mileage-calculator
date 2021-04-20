@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  listItem: {
+    fontWeight: "bold",
+    fontSize: 15,
+  },
 }));
-
-const twoWheelersList = ["Ather", "Bajaj", "TVS", "PureEV"];
-const threeWheelersList = ["Mahindra", "Kinetic", "Atul", "Euler"];
-const fourWheelersList = ["Tata", "MG", "Hyundai"];
 
 const IndexPage = () => {
   const classes = useStyles();
@@ -77,7 +77,7 @@ const IndexPage = () => {
           <h2>EV Mileage Calculator</h2>
           <p>
             Estimate the performance of your next desired Electric Vehicle.
-            Compare its performance with your Petrol or Diesel Vehicle.
+            {/* Compare its performance with your Petrol or Diesel Vehicle. */}
           </p>
         </Grid>
       </Grid>
@@ -89,33 +89,39 @@ const IndexPage = () => {
           onClick={() => handleClick("twowheelers")}
         >
           <ListItemIcon>
-            <MotorcycleIcon />
+            <h3>
+              <MotorcycleIcon />
+            </h3>
           </ListItemIcon>
-          <ListItemText primary="2 Wheelers" />
+          <ListItemText primary={<h3>2 Wheelers</h3>} />
           {twowheelers ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={twowheelers} timeout="auto" unmountOnExit>
-          <EVCalculator models={twoWheelersList} />
+          <EVCalculator type="twoWheelers" />
         </Collapse>
         <ListItem button onClick={() => handleClick("threewheelers")}>
           <ListItemIcon>
-            <LocalShippingOutlinedIcon />
+            <h3>
+              <LocalShippingOutlinedIcon />
+            </h3>
           </ListItemIcon>
-          <ListItemText primary="3 Wheelers" />
+          <ListItemText primary={<h3>3 Wheelers</h3>} />
           {threewheelers ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={threewheelers} timeout="auto" unmountOnExit>
-          <EVCalculator models={threeWheelersList} />
+          <EVCalculator type="threeWheelers" />
         </Collapse>
         <ListItem button onClick={() => handleClick("fourwheelers")}>
           <ListItemIcon>
-            <DriveEtaIcon />
+            <h3>
+              <DriveEtaIcon />
+            </h3>
           </ListItemIcon>
-          <ListItemText primary="4 Wheelers" />
+          <ListItemText primary={<h3>4 Wheelers</h3>} />
           {fourwheelers ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={fourwheelers} timeout="auto" unmountOnExit>
-          <EVCalculator models={fourWheelersList} />
+          <EVCalculator type="fourWheelers" />
         </Collapse>
       </List>
     </Layout>

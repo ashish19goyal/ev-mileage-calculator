@@ -21,8 +21,8 @@ const GridFaq = ({ serial, question, answer, list }) => {
   const classes = useStyles();
   let items =
     list != null
-      ? list.map((item) => (
-          <Grid item xs={12}>
+      ? list.map((item, i) => (
+          <Grid key={i} item xs={12}>
             <li>{item}</li>
           </Grid>
         ))

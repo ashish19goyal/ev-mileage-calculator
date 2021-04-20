@@ -11,7 +11,7 @@ import Select from "@material-ui/core/Select";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    width: "100%",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -22,7 +22,11 @@ const EvSelect = ({ items, handleChange, label, value, description }) => {
   const classes = useStyles();
   let menuItems =
     items != null
-      ? items.map((item) => <MenuItem value={item}>{item}</MenuItem>)
+      ? items.map((item, i) => (
+          <MenuItem value={item} key={i}>
+            {item}
+          </MenuItem>
+        ))
       : "";
 
   return (
