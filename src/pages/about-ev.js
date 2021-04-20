@@ -55,11 +55,16 @@ const AboutEVPage = () => {
   return (
     <Layout>
       <Seo title="About Electric Vehicles" />
-      <Grid container item>
-        <h2>About Electric Vehicle</h2>
-        <p>
-          Find the most frequently asked questions about electric vehicles here.
-        </p>
+      <Grid container>
+        <Grid item xs={12}>
+          <h2>About Electric Vehicle</h2>
+        </Grid>
+        <Grid item xs={12}>
+          <p>
+            Find the most frequently asked questions about electric vehicles
+            here.
+          </p>
+        </Grid>
       </Grid>
       <Divider />
       {questions.map((question, i) => {

@@ -45,9 +45,13 @@ const BatteryPage = () => {
   return (
     <Layout>
       <Seo title="About Batteries" />
-      <Grid container item>
-        <h2>About Batteries</h2>
-        <p>Know about the batteries used in your electric vehicle.</p>
+      <Grid container>
+        <Grid item xs={12}>
+          <h2>About Batteries</h2>
+        </Grid>
+        <Grid item xs={12}>
+          <p>Know about the batteries used in your electric vehicle.</p>
+        </Grid>
       </Grid>
       <Divider />
 
