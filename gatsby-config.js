@@ -1,6 +1,7 @@
 module.exports = {
   pathPrefix: "/ev-mileage-calculator",
   siteMetadata: {
+    siteUrl: "https://evquestions.in/",
     title: "All About Electric Vehicles",
     description:
       "Estimate the performance of your next desired Electric Vehicle. Compare its performance with your Petrol/Diesel Vehicle.",
