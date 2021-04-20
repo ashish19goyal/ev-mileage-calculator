@@ -7,13 +7,13 @@ import EvInput from "./form-elements/ev-input";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-const chargingStyles = [
-  "Once a day charging at home",
-  "Twice a day charged at home and office",
-  "Multiple times a day charged at home/office",
-  "Once a day Fast charger charging",
-  "Multiple times a day fast charging",
-];
+// const chargingStyles = [
+//   "Once a day charging at home",
+//   "Twice a day charged at home and office",
+//   "Multiple times a day charged at home/office",
+//   "Once a day Fast charger charging",
+//   "Multiple times a day fast charging",
+// ];
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,20 +43,9 @@ const EVCalculator = ({ type }) => {
   const [interestRate, setInterestRate] = React.useState(10);
   const [electricityCharges, setElectricityCharges] = React.useState(10);
 
-  // usage pattern
-  const [dailyRun, setDailyRun] = React.useState(10);
-  const [chargingStyle, setChargingStyle] = React.useState(
-    "Once a day charging at home"
-  );
-
   let makesList = [
     ...new Set(EvsInMarket[type].map((vehicle) => vehicle.make)),
   ];
-
-  const handleChargingStyleChange = (event) => {
-    setChargingStyle(event.target.value);
-    calculateCost({ modelInfo, electricityCharges, interestRate });
-  };
 
   const handleMakeChange = (event) => {
     let m = event.target.value;
@@ -77,11 +66,6 @@ const EVCalculator = ({ type }) => {
     getModelInfo(m);
   };
 
-  const handleDailyRunChange = (event) => {
-    setDailyRun(event.target.value);
-    calculateCost({ modelInfo, electricityCharges, interestRate });
-  };
-
   const handleInterestRateChange = (event) => {
     setInterestRate(event.target.value);
     calculateCost({
@@ -93,7 +77,11 @@ const EVCalculator = ({ type }) => {
 
   const handleElectricityChargesChange = (event) => {
     setElectricityCharges(event.target.value);
-    calculateCost({ modelInfo, electricityCharges: event.target.value });
+    calculateCost({
+      modelInfo,
+      electricityCharges: event.target.value,
+      interestRate,
+    });
   };
 
   const getModelInfo = (m) => {
@@ -216,26 +204,6 @@ const EVCalculator = ({ type }) => {
           value={modelInfo.battery.cycles}
           description="Life of battery in terms of charging cycles"
           readonly
-        />
-      </Paper>
-      <Paper className={classes.paper}>
-        <Grid>
-          <h4>Update based on your usage</h4>
-        </Grid>
-
-        <EvInput
-          label="Daily run"
-          value={dailyRun}
-          description="Estimate of your daily commute"
-          handleChange={handleDailyRunChange}
-          endUnit="km"
-        />
-        <EvSelect
-          items={chargingStyles}
-          value={chargingStyle}
-          label="Your chargning style"
-          description="How do you plan to charge your vehicle"
-          handleChange={handleChargingStyleChange}
         />
       </Paper>
       <Paper className={classes.paper}>
