@@ -7,14 +7,6 @@ import EvInput from "./form-elements/ev-input";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-// const chargingStyles = [
-//   "Once a day charging at home",
-//   "Twice a day charged at home and office",
-//   "Multiple times a day charged at home/office",
-//   "Once a day Fast charger charging",
-//   "Multiple times a day fast charging",
-// ];
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: `${theme.spacing(1)}px auto`,
@@ -42,6 +34,9 @@ const EVCalculator = ({ type }) => {
   // rates
   const [interestRate, setInterestRate] = React.useState(10);
   const [electricityCharges, setElectricityCharges] = React.useState(10);
+
+  // usage
+  const [dailyRun, setDailyRun] = React.useState(50);
 
   let makesList = [
     ...new Set(EvsInMarket[type].map((vehicle) => vehicle.make)),
@@ -72,6 +67,7 @@ const EVCalculator = ({ type }) => {
       modelInfo,
       electricityCharges,
       interestRate: event.target.value,
+      dailyRun,
     });
   };
 
@@ -81,6 +77,17 @@ const EVCalculator = ({ type }) => {
       modelInfo,
       electricityCharges: event.target.value,
       interestRate,
+      dailyRun,
+    });
+  };
+
+  const handleDailyRunChange = (event) => {
+    setDailyRun(event.target.value);
+    calculateCost({
+      modelInfo,
+      electricityCharges,
+      interestRate,
+      dailyRun: event.target.value,
     });
   };
 
@@ -94,38 +101,60 @@ const EVCalculator = ({ type }) => {
         modelInfo: modelInfo[0],
         electricityCharges,
         interestRate,
+        dailyRun,
       });
     }
   };
 
-  const calculateCost = ({ modelInfo, electricityCharges, interestRate }) => {
-    if (electricityCharges != null) {
-      let runningCostValue = (
-        (modelInfo.mileage * electricityCharges) /
-        1000
-      ).toFixed(2);
-      setRunningCost(runningCostValue);
-    }
+  const calculateCost = ({
+    modelInfo,
+    electricityCharges,
+    interestRate,
+    dailyRun,
+  }) => {
+    let mileage = (modelInfo.battery.capacity * 1000) / modelInfo.range;
+    console.log("mileage" + mileage);
+    let runningCostValue = ((mileage * electricityCharges) / 1000).toFixed(2);
+    setRunningCost(runningCostValue);
+
+    let years = Math.min(5, modelInfo.battery.years);
+
+    let maxDailyKms = Math.min(
+      dailyRun,
+      (modelInfo.battery.capacity * 1000 * modelInfo.battery.dod) / mileage
+    );
+    console.log("maxDailyKms" + maxDailyKms);
+
+    let totalKms = years * 365 * maxDailyKms;
+    console.log("totalKms" + totalKms);
+
+    let allowedTotalKms =
+      modelInfo.battery.distance == 0
+        ? totalKms
+        : Math.min(totalKms, modelInfo.battery.distance);
+
+    console.log("allowedTotalKms" + allowedTotalKms);
+    let actualBatteryYears = allowedTotalKms / 365 / maxDailyKms;
+    console.log("actualBatteryYears" + actualBatteryYears);
 
     let priceIncludingInterest =
-      (interestRate * modelInfo.battery.price * modelInfo.battery.cycles) /
+      (interestRate * modelInfo.battery.price * actualBatteryYears) /
         1.55 /
-        365 /
         100 +
       modelInfo.battery.price;
-    console.log("priceIncludingInterest " + priceIncludingInterest);
-    let totalKms =
-      (modelInfo.battery.cycles *
-        modelInfo.battery.capacity *
-        1000 *
-        modelInfo.battery.dod) /
-      modelInfo.mileage;
+    console.log("priceIncludingInterest" + priceIncludingInterest);
+
     let totalRunningCostValue = (
-      (modelInfo.mileage * electricityCharges) / 1000 +
-      priceIncludingInterest / totalKms
+      (mileage * electricityCharges) / 1000 +
+      priceIncludingInterest / allowedTotalKms
     ).toFixed(2);
     setTotalRunningCost(totalRunningCostValue);
   };
+
+  let mileage =
+    modelInfo.range > 0
+      ? Math.round((modelInfo.battery.capacity * 1000) / modelInfo.range)
+      : 0;
 
   return (
     <div>
@@ -156,16 +185,29 @@ const EVCalculator = ({ type }) => {
         />
         <EvInput
           label="Range"
-          value={modelInfo.range}
+          value={modelInfo.certifiedRange}
           description="Range of vehicle"
           endUnit="km"
           readonly
         />
         <EvInput
           label="Mileage"
-          value={modelInfo.mileage}
+          value={mileage}
           description="Mileage of vehicle"
           endUnit="Wh/km"
+          readonly
+        />
+        <EvInput
+          label="Top Speed"
+          value={modelInfo.topSpeed}
+          description="Top speed of the vehicle"
+          endUnit="km/h"
+          readonly
+        />
+        <EvInput
+          label="Pickup"
+          value={modelInfo.pickup}
+          description="How good can it accelerate"
           readonly
         />
       </Paper>
@@ -174,35 +216,24 @@ const EVCalculator = ({ type }) => {
           <h4>Battery Specifications</h4>
         </Grid>
         <EvInput
-          label="Battery Price"
+          label="Price"
           value={modelInfo.battery.price}
-          description="Cost of changing the battery"
+          description="Approximate cost of replacement of the battery"
           startUnit="Rs"
           readonly
         />
         <EvInput
-          label="Battery Capacity"
+          label="Capacity"
           value={modelInfo.battery.capacity}
           description="Energy capacity of the battery"
           endUnit="kwh"
           readonly
         />
         <EvInput
-          label="C-Rate"
-          value={modelInfo.battery.cRate}
-          description="Higher the better. Read FAQs for more information."
-          readonly
-        />
-        <EvInput
-          label="Depth of Discharge"
-          value={modelInfo.battery.dod}
-          description="Higher the better. Read FAQs for more information."
-          readonly
-        />
-        <EvInput
-          label="Charging Cycles"
-          value={modelInfo.battery.cycles}
-          description="Life of battery in terms of charging cycles"
+          label="Warranty"
+          value={modelInfo.battery.years}
+          description="Battery will be replaced by OEM free of cost for underperformance during this time."
+          endUnit="years"
           readonly
         />
       </Paper>
@@ -224,6 +255,18 @@ const EVCalculator = ({ type }) => {
           handleChange={handleElectricityChargesChange}
           startUnit="Rs"
           endUnit="/kwh"
+        />
+      </Paper>
+      <Paper className={classes.paper}>
+        <Grid>
+          <h4>your daily usage</h4>
+        </Grid>
+        <EvInput
+          label="Your daily usage"
+          value={dailyRun}
+          description="Update based on your usage"
+          handleChange={handleDailyRunChange}
+          endUnit="km/day"
         />
       </Paper>
       <Paper className={classes.paper}>

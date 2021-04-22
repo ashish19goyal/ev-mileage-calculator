@@ -11,6 +11,10 @@ import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
 import "./layout.css";
+import Divider from "@material-ui/core/Divider";
+
+const disclaimer =
+  "The author is not liable for any damages arising in contract, tort or otherwise from the use of or inability to use this site or any material contained in it, or from any action or decision taken as a result of using this site. The materials and information available on this site are approximations and comprise the Author's views. They do not constitute legal or other professional advice. If you need specific advice please seek a professional who is licensed or knowledgeable in that area.";
 
 const Layout = ({ children }) => {
   return (
@@ -36,8 +40,14 @@ const Layout = ({ children }) => {
             }}
           >
             <main>{children}</main>
+            <Divider />
             <footer style={{ paddingTop: 10 }}>
-              © {new Date().getFullYear()} Author: Ashish Goyal
+              <p>
+                <b>Disclaimer</b>: {disclaimer}
+              </p>
+              <p>
+                <b>Author</b>: Ashish Goyal
+              </p>
             </footer>
           </div>
         </div>

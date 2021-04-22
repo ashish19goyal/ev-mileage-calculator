@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: "/ev-mileage-calculator",
   siteMetadata: {
     siteUrl: "https://evquestions.in/",
     title: "All About Electric Vehicles",
