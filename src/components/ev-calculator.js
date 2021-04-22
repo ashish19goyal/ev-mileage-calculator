@@ -117,7 +117,7 @@ const EVCalculator = ({ type }) => {
     let runningCostValue = ((mileage * electricityCharges) / 1000).toFixed(2);
     setRunningCost(runningCostValue);
 
-    let years = Math.min(5, modelInfo.battery.years);
+    let years = Math.min(8, modelInfo.battery.years);
 
     let maxDailyKms = Math.min(
       dailyRun,
@@ -259,12 +259,12 @@ const EVCalculator = ({ type }) => {
       </Paper>
       <Paper className={classes.paper}>
         <Grid>
-          <h4>your daily usage</h4>
+          <h4>Your daily usage</h4>
         </Grid>
         <EvInput
           label="Your daily usage"
           value={dailyRun}
-          description="Update based on your usage"
+          description="Update based on your usage. This will have an impact on your total cost of ownership"
           handleChange={handleDailyRunChange}
           endUnit="km/day"
         />

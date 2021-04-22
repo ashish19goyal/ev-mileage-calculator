@@ -8,17 +8,27 @@ import Divider from "@material-ui/core/Divider";
 
 const questions = [
   {
-    question: "Can I charge my EV at home",
-    answer: "Yes, two types of power supplies are available at Indian homes",
+    question: "Can I charge my EV at home?",
+    answer:
+      "Yes, you can charge your EV at home. Though the charging is going to be slow and take a few hours. You can charge with one of the two types of power supplies available at Indian homes",
     list: [
       "5A power line, resulting in 5A*220V = 1.1 KW power",
       "15A power line, resulting in 15A*220V = 3.3 KW power",
     ],
   },
   {
-    question: "What are fast chargers?",
+    question: "How can I fast charge my EV?",
     answer:
-      "Fast chargers are usually DC chargers. These can supply very high power to charge your EV batteryvery quickly.",
+      "Fast chargers are usually DC chargers. These can supply very high power to charge your EV battery very quickly. These are not safe to be installed at home. So, you have to go to a EV charging point to use one of these.",
+  },
+  {
+    question: "How much would it cost me to do one complete charge of my EV?",
+    answer: "Depending on the model it would cost you",
+    list: [
+      "Rs 300-500 for cars",
+      "Rs 50-80 for 3 wheelers",
+      "Rs 25-30 for bikes and scooters",
+    ],
   },
   {
     question: "Do EVs have different types of chargers?",

@@ -13,12 +13,27 @@ const questions = [
       "Batteries provide an easy way of storing electric energy. This energy can be used in a controlled manner when required. Today batteries are used in a number of applications ranging from smartphones to space stations.",
   },
   {
+    question: "How much does the batteries cost?",
+    answer:
+      "The cost of batteries in EVs is about 30-40% of the overall cost of the vehicle. With the available models in India, EV batteries would cost you",
+    list: [
+      "Rs 4-7 lakhs for cars",
+      "Rs 50000 for 3 wheelers",
+      "Rs 40-60 thousands for bikes and scooters",
+    ],
+  },
+  {
     question: "Are batteries safe to use in vehicles?",
     answer:
       "Batteries are being used in vehicles for a long time. Earlier they supported only auxillary functions like power windows, headlights etc. In EVs, these batteries replace fossil fuel as the primary source of energy. Batteries are already safer than the fossil fuels. This will further improve in future with better techology for battery management.",
   },
   {
-    question: "What do batteries consist of?",
+    question: "Can EV batteries catch fire?",
+    answer:
+      "Yes, these batteries can catch fire. And these fires can be very dangerous as the batteries carry a lot of energy. Infact, a Tesla burnt for almost 4 hours after an accident due to the batteries catching fire.",
+  },
+  {
+    question: "What are battery packs?",
     answer:
       "The energy requirement of automobiles is very high. To meet this requirement a complex array of batteries is used. These are structured as follows -",
     list: [

@@ -9,11 +9,12 @@ import Divider from "@material-ui/core/Divider";
 const questions = [
   {
     question: "How are EVs environment friendly?",
-    answer: "EVs are environment frinedly in a number of ways as listed below ",
+    answer: "EVs are environment frinedly in a number of ways",
     list: [
-      "EVs have a energy efficeincy of 80-90% as compared to 25% efficiency of ICe vehicles. This means EVs used only a 3rd of energy used by ICE vehicles.",
+      "EVs have a energy efficeincy of about 90% as compared to 25% efficiency of ICE vehicles. This means EVs used only a 3rd of energy used by ICE vehicles.",
       "It is very difficult to manage effluents from ICE vehicles as they are spread out on the roads. However, EVs are powered by electricity generated at Mega power plants, where effluents can be handled with much more ease.",
-      "Evs can also be powered by clean energy generated from solar and wind",
+      "EVs can also be powered by clean energy generated from solar and wind",
+      "ICE vehicles run on fossil fueles, that are going to run out sooner or later. EVs work on electricity, that can be generated from renewable sources.",
     ],
   },
   {
