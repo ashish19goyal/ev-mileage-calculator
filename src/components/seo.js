@@ -26,12 +26,18 @@ function Seo({ description, lang, meta, title, questions }) {
   );
 
   const getQuestionStructure = (q) => {
+    let answer = q.answer;
+    if (q.list != null) {
+      q.list.forEach((item) => {
+        answer = answer + " " + item;
+      });
+    }
     return {
       "@type": "Question",
       name: q.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: q.answer,
+        text: answer,
       },
     };
   };
@@ -43,7 +49,7 @@ function Seo({ description, lang, meta, title, questions }) {
     "@type": "FAQPage",
     mainEntity: [],
   };
-  if (questions !== null) {
+  if (questions != null) {
     questions.forEach((q) => {
       structuredJson.mainEntity.push(getQuestionStructure(q));
     });
