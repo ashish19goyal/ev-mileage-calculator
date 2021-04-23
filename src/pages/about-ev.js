@@ -34,14 +34,9 @@ const questions = [
   },
   {
     question:
-      "What if my EV's battery is out and I do not find a charging poinnt?",
+      "What if my EV's battery is out and I do not find a charging point?",
     answer:
       "This is a common concern among EV owners. Its called range anxiety. It used to be the same case in the early days of ICE vehicles too. However, with the ever increasing ecosystem of EVs, there will be ample infrastructure to charge your EV soon enough. Please note that setting up the charging infrastructure is much cheaper than setting up a petrol pump.",
-    list: [
-      "Cars: 200-300 kms",
-      "3 wheelers: 80-120 kms",
-      "Bikes and scooters: 70-100 kms",
-    ],
   },
   {
     question: "What is the maintenance cost of EVs?",
