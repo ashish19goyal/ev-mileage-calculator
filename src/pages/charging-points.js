@@ -72,7 +72,7 @@ const ChargingPoints = () => {
   let serial = 0;
   return (
     <Layout>
-      <Seo title="Charing Points" />
+      <Seo title="Charing Points" questions={questions} />
       <Grid container>
         <Grid item xs={12}>
           <h2>Charing Points</h2>

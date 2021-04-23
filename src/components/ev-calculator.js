@@ -129,7 +129,7 @@ const EVCalculator = ({ type }) => {
     console.log("totalKms" + totalKms);
 
     let allowedTotalKms =
-      modelInfo.battery.distance == 0
+      modelInfo.battery.distance === 0
         ? totalKms
         : Math.min(totalKms, modelInfo.battery.distance);
 

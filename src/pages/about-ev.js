@@ -122,7 +122,7 @@ const AboutEVPage = () => {
   let serial = 0;
   return (
     <Layout>
-      <Seo title="About Electric Vehicles" />
+      <Seo title="About Electric Vehicles" questions={questions} />
       <Grid container>
         <Grid item xs={12}>
           <h2>About Electric Vehicle</h2>

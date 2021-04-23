@@ -55,7 +55,6 @@ EvInput.propTypes = {
   multiline: PropTypes.bool,
   startUnit: PropTypes.string,
   endUnit: PropTypes.string,
-  multiline: PropTypes.bool,
   readonly: PropTypes.bool,
 };
 

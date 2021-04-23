@@ -40,7 +40,7 @@ const Environment = () => {
   let serial = 0;
   return (
     <Layout>
-      <Seo title="Impact of EVs on Environment" />
+      <Seo title="Impact of EVs on Environment" questions={questions} />
       <Grid container>
         <Grid item xs={12}>
           <h2>Impact of EVs on Environment</h2>

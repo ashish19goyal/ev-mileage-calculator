@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-function Seo({ description, lang, meta, title }) {
+function Seo({ description, lang, meta, title, questions }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -25,7 +25,31 @@ function Seo({ description, lang, meta, title }) {
     `
   );
 
+  const getQuestionStructure = (q) => {
+    return {
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: q.answer,
+      },
+    };
+  };
+
   const metaDescription = description || site.siteMetadata.description;
+
+  let structuredJson = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [],
+  };
+  if (questions !== null) {
+    questions.forEach((q) => {
+      structuredJson.mainEntity.push(getQuestionStructure(q));
+    });
+  }
+
+  console.log(structuredJson);
 
   return (
     <Helmet
@@ -72,7 +96,11 @@ function Seo({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      <script type="application/ld+json">
+        {JSON.stringify(structuredJson)}
+      </script>
+    </Helmet>
   );
 }
 

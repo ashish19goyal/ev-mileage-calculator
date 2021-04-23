@@ -59,7 +59,7 @@ const BatteryPage = () => {
   let serial = 0;
   return (
     <Layout>
-      <Seo title="About Batteries" />
+      <Seo title="About Batteries" questions={questions} />
       <Grid container>
         <Grid item xs={12}>
           <h2>About Batteries</h2>
