@@ -44,6 +44,16 @@ const questions = [
       "This is a common concern among EV owners. Its called range anxiety. It used to be the same case in the early days of ICE vehicles too. However, with the ever increasing ecosystem of EVs, there will be ample infrastructure to charge your EV soon enough. Please note that setting up the charging infrastructure is much cheaper than setting up a petrol pump.",
   },
   {
+    question: "What can I do to optimize my EVs driving range?",
+    answer:
+      "The driving range can be extended by following good dirving practices as listed below",
+    list: [
+      "Drive at lower speeds of upto 50 kmph for cars and upto 25 kmph for 2 wheelers and 3 wheelers",
+      "Do not overload the vehicle",
+      "Do not park the vehicle in direct sunlight in summers.",
+    ],
+  },
+  {
     question: "What is the maintenance cost of EVs?",
     answer:
       "EVs have fewer sub systems and components as compared to ICE vehicle, making their maintenance much cheaper. However, there is a reccuring cost of battery replacement every 5 years or so.",
@@ -115,6 +125,12 @@ const questions = [
     question: "Can I convert my ICE vehicle to EV?",
     answer:
       "Theoretically this is feasible. However, financial considerations do not favour converting existing ICE vehicle to EV. It will be financially prudent to opt for your next vehicle to be an EV rather than converting your existing vechile.",
+  },
+  {
+    question:
+      "Why international automobile manufacturers are not launching electric vehicles in India?",
+    answer:
+      "A few international automobile manufacturers are launching their electric vehicles in India also. However, they are not launching as many models as launched in internation market. This is particularly because India automobile market has matured and models needs to be developed specifically for Indian conditions. International models will not work as it is in Indian market. ",
   },
 ];
 

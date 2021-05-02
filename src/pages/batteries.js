@@ -23,6 +23,15 @@ const questions = [
     ],
   },
   {
+    question: "What is the breakdown of the cost of the battery?",
+    answer: "",
+    list: [
+      "Raw materials like Li, Ni, Co, Mn contributes to about 40% of the cost",
+      "Cell assembly contributes about 25% to the cost",
+      "Battery pack assembly contributes about 35% to the cost",
+    ],
+  },
+  {
     question: "Are batteries safe to use in vehicles?",
     answer:
       "Batteries are being used in vehicles for a long time. Earlier they supported only auxillary functions like power windows, headlights etc. In EVs, these batteries replace fossil fuel as the primary source of energy. Batteries are already safer than the fossil fuels. This will further improve in future with better techology for battery management.",
@@ -52,6 +61,11 @@ const questions = [
       "C-Rate: This is the rate of charge or discharge of battery. The higher it is the better, as your vehicle would be able to charge faster. Also, when higher power is required, it can deliver better pickup. It also depends on the temperature of the battery unit.",
       "Depth of discharge: It specifies the working range of the battery. e.g. a battery can be used effectively between 10% charged to 90% charged state only. The higher it is the better.",
     ],
+  },
+  {
+    question: "Can EV batteries be recycled?",
+    answer:
+      "Theoretically 100% of the battery can be recycled. Recovered raw materials can then be used in manufacturing process. However, the recycling process is not yet commercially viable.",
   },
 ];
 

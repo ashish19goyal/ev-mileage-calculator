@@ -19,6 +19,7 @@ import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
 import EcoIcon from "@material-ui/icons/Eco";
 import PowerIcon from "@material-ui/icons/Power";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import HeaderLink from "../components/header-link";
 import Grid from "@material-ui/core/Grid";
 
@@ -102,6 +103,11 @@ const links = [
     link: "/charging-points",
     heading: "Charging Points",
     icon: <PowerIcon />,
+  },
+  {
+    link: "/battery-swapping",
+    heading: "Battery Swapping",
+    icon: <SwapHorizIcon />,
   },
   {
     link: "/environment",

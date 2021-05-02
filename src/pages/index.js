@@ -83,6 +83,18 @@ const IndexPage = () => {
       </Grid>
       <Divider />
       <List component="nav" className={classes.root}>
+        <ListItem button onClick={() => handleClick("fourwheelers")}>
+          <ListItemIcon>
+            <h3>
+              <DriveEtaIcon />
+            </h3>
+          </ListItemIcon>
+          <ListItemText primary={<h3>4 Wheelers</h3>} />
+          {fourwheelers ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={fourwheelers} timeout="auto" unmountOnExit>
+          <EVCalculator type="fourWheelers" />
+        </Collapse>
         <ListItem
           id="features"
           button
@@ -110,18 +122,6 @@ const IndexPage = () => {
         </ListItem>
         <Collapse in={threewheelers} timeout="auto" unmountOnExit>
           <EVCalculator type="threeWheelers" />
-        </Collapse>
-        <ListItem button onClick={() => handleClick("fourwheelers")}>
-          <ListItemIcon>
-            <h3>
-              <DriveEtaIcon />
-            </h3>
-          </ListItemIcon>
-          <ListItemText primary={<h3>4 Wheelers</h3>} />
-          {fourwheelers ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={fourwheelers} timeout="auto" unmountOnExit>
-          <EVCalculator type="fourWheelers" />
         </Collapse>
       </List>
     </Layout>
