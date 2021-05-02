@@ -23,6 +23,11 @@ const questions = [
     ],
   },
   {
+    question: "Do I feel any difference when driving an EV?",
+    answer:
+      "Yes, the differences are mostly pleasant. Particularly all the subsystems in EVs are electrical. Unlike in ICE vehicles, where a lot of things are still hydraulic. Electric systems are better automated and gives a better driving experience. Also, EVs naturally support automatic transmission. Unlike ICE where additional components were put in to make it automatic. So, you will not feel any lag in transmission when speeding up or down.",
+  },
+  {
     question: "What is the driving range of EVs?",
     answer:
       "The range of electric vehicles depend on the size of the battery. In 2021, the options available in India have ",
