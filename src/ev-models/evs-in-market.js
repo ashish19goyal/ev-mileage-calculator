@@ -12,7 +12,7 @@ const EvsInMarket = {
       power: 6, //in kw
       battery: {
         capacity: 2.9, // in kwh
-        price: 60000, // in Rs
+        price: 50000, // in Rs
         years: 3,
         distance: 90000, // in km
         dod: 0.85,
@@ -30,7 +30,7 @@ const EvsInMarket = {
       power: 5.4,
       battery: {
         capacity: 2.9, // in kwh
-        price: 60000, // in Rs
+        price: 40000, // in Rs
         years: 3,
         distance: 80000, // in km
         dod: 0.85,
@@ -175,14 +175,14 @@ const EvsInMarket = {
       model: "Nexon",
       description: "A mid size SUV from the Indian automaker Tata Motors",
       certifiedRange: 312,
-      range: 200, // in km
+      range: 220, // in km
       topSpeed: 120,
       pickup: "0-100 in 10 seconds",
       torque: 245,
       power: 95,
       battery: {
         capacity: 30.2, // in kw
-        price: 450000, // in Rs
+        price: 500000, // in Rs
         years: 8,
         distance: 160000,
         dod: 0.85,
@@ -200,8 +200,8 @@ const EvsInMarket = {
       power: 105,
       battery: {
         capacity: 44.5, // in kw
-        price: 700000, // in Rs
-        years: 5,
+        price: 1200000, // in Rs
+        years: 8,
         distance: 150000,
         dod: 0.85,
       },
@@ -212,14 +212,14 @@ const EvsInMarket = {
       description:
         "Versatile and powerful, the KONA Electric is an All-Electric compact SUV",
       certifiedRange: 452,
-      range: 300, // in km
+      range: 320, // in km
       topSpeed: 167,
       pickup: "0-100 in 9.7 seconds",
       torque: 395,
       power: 100,
       battery: {
         capacity: 39.2, // in kw
-        price: 700000, // in Rs
+        price: 1200000, // in Rs
         years: 8,
         distance: 160000,
         dod: 0.85,

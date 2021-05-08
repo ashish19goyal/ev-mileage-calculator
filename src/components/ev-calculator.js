@@ -113,36 +113,34 @@ const EVCalculator = ({ type }) => {
     dailyRun,
   }) => {
     let mileage = (modelInfo.battery.capacity * 1000) / modelInfo.range;
-    console.log("mileage" + mileage);
     let runningCostValue = ((mileage * electricityCharges) / 1000).toFixed(2);
     setRunningCost(runningCostValue);
 
-    let years = Math.min(8, modelInfo.battery.years);
+    let oneChargeKms =
+      (modelInfo.battery.capacity * 1000 * modelInfo.battery.dod * 0.8) /
+      mileage;
+    let years =
+      dailyRun < 0.4 * oneChargeKms
+        ? Math.max(10, modelInfo.battery.years)
+        : Math.max(5, modelInfo.battery.years);
 
-    let maxDailyKms = Math.min(
-      dailyRun,
-      (modelInfo.battery.capacity * 1000 * modelInfo.battery.dod) / mileage
+    let totalKms = years * 365 * dailyRun;
+
+    let allowedTotalKms = Math.min(
+      totalKms,
+      (years *
+        365 *
+        modelInfo.battery.capacity *
+        1000 *
+        modelInfo.battery.dod) /
+        mileage
     );
-    console.log("maxDailyKms" + maxDailyKms);
 
-    let totalKms = years * 365 * maxDailyKms;
-    console.log("totalKms" + totalKms);
-
-    let allowedTotalKms =
-      modelInfo.battery.distance === 0
-        ? totalKms
-        : Math.min(totalKms, modelInfo.battery.distance);
-
-    console.log("allowedTotalKms" + allowedTotalKms);
-    let actualBatteryYears = allowedTotalKms / 365 / maxDailyKms;
-    console.log("actualBatteryYears" + actualBatteryYears);
+    let actualBatteryYears = allowedTotalKms / 365 / dailyRun;
 
     let priceIncludingInterest =
-      (interestRate * modelInfo.battery.price * actualBatteryYears) /
-        1.55 /
-        100 +
-      modelInfo.battery.price;
-    console.log("priceIncludingInterest" + priceIncludingInterest);
+      modelInfo.battery.price *
+      Math.pow(1 + interestRate / 100, actualBatteryYears);
 
     let totalRunningCostValue = (
       (mileage * electricityCharges) / 1000 +
@@ -274,7 +272,7 @@ const EVCalculator = ({ type }) => {
           <h4>Cost Estimates</h4>
         </Grid>
         <EvInput
-          label="Daily Running Cost"
+          label="Operational Cost"
           value={runningCost}
           description="Running cost"
           startUnit="Rs"
@@ -282,7 +280,7 @@ const EVCalculator = ({ type }) => {
           readonly
         />
         <EvInput
-          label="Total Running Cost"
+          label="Capital + Operational Cost"
           value={totalRunningCost}
           description="Running cost including cost of change of battery"
           startUnit="Rs"

@@ -36,9 +36,9 @@ const useStyles = makeStyles((theme) => ({
 
 const IndexPage = () => {
   const classes = useStyles();
-  const [twowheelers, settwowheelers] = React.useState(true);
+  const [twowheelers, settwowheelers] = React.useState(false);
   const [threewheelers, setthreewheelers] = React.useState(false);
-  const [fourwheelers, setfourwheelers] = React.useState(false);
+  const [fourwheelers, setfourwheelers] = React.useState(true);
 
   function handleClick(id) {
     switch (id) {
